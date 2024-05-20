@@ -1,8 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using clique.Algorithms;
-using static clique.Algorithms.BronKerbosch;
-using static clique.Algorithms.GreedyMethod;
 using System.Diagnostics;
 using clique.Validate;
 
@@ -29,10 +27,9 @@ public class Graph
     
     public void Calulate()
     {
+        AdjacencyMatrix = ReadMatrix();
         if (CorrectMatrix)
         {
-            AdjacencyMatrix = ReadMatrix(textBoxes);
-
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             switch (chosenMethod)
@@ -49,7 +46,7 @@ public class Graph
         }
     }
     
-    private int[,] ReadMatrix(TextBox[,] textBoxes)
+    private int[,] ReadMatrix()
     {
         int matrixSize = textBoxes.GetLength(0);
 
@@ -57,12 +54,13 @@ public class Graph
 
         for (int i = 0; i < matrixSize && CorrectMatrix; i++)
             for (int j = 0; j < matrixSize && CorrectMatrix; j++)
-                if (int.TryParse(textBoxes[i, j].Text.ToString(), out int value) && (value == 0 || value == 1))
+                if (int.TryParse(textBoxes[i, j].Text, out int value) && (value == 0 || value == 1))
                     matrixValues[i, j] = value;
                 else
                 {
                     new ValidateAdjacencyMatrix(MainWindow).MatrixError();
                     CorrectMatrix = false;
+                    return new int[0, 0];
                 }
 
         return matrixValues;

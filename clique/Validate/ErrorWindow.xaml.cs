@@ -1,13 +1,12 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
+﻿using System.Windows;
+
 
 namespace clique.Validate
 {
-    public partial class ErrorWindow : Window
+    public partial class ErrorWindow
     {
+        public string ErrorMessage { get; private set; }
+        
         public ErrorWindow(Window MainWindow, string errorMessage)
         {
             InitializeComponent();
@@ -17,10 +16,8 @@ namespace clique.Validate
             WindowStartupLocation = WindowStartupLocation.CenterOwner;
             OkButton.Click += Close;
         }
-
-        public string ErrorMessage { get; private set; }
-
-        private void Close(object sender, RoutedEventArgs e)
+        
+        private void Close(object sender, EventArgs e)
         {
             this.Close();
         }

@@ -1,20 +1,14 @@
-﻿using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using clique.Calculate;
 using clique.File;
 using clique.Validate;
 
 namespace clique;
 
-public partial class MainWindow : Window
+public partial class MainWindow
 {
     private TextBox[,] textBoxes;
     private Graph graph;
@@ -94,8 +88,7 @@ public partial class MainWindow : Window
 
     private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
     {
-        TextBox textBox = sender as TextBox;
-        if (textBox != null)
+        if (sender is TextBox textBox)
         {
             int row = Grid.GetRow(textBox);
             int column = Grid.GetColumn(textBox);
@@ -251,7 +244,7 @@ public partial class MainWindow : Window
     private void ShowResult()
     {
         string toDoComplexity = ((ComboBoxItem)ComboBoxComplexity.SelectedItem).Content.ToString();
-        bool showTime = toDoComplexity == "Так" ? true : false;
+        bool showTime = toDoComplexity == "Так";
         
         ResultWindow resultWindow = new ResultWindow(this, graph, showTime);
         resultWindow.ShowDialog();

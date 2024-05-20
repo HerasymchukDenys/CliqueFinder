@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -8,7 +6,7 @@ using clique.Calculate;
 
 namespace clique.DrawGraph
 {
-    public partial class GraphDrawing : Window
+    public partial class GraphDrawing
     {
         public Graph graph { get; private set; }
         

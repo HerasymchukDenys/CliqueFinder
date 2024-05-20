@@ -9,29 +9,28 @@ namespace clique.File
     {
         public string Path { get; set; }
         public string FileName { get; set; }
-        public Graph Graph { get; set; }
+        public Graph graph { get; set; }
 
         public WriteToFile(string path, string fileName, Graph graph)
         {
             Path = path;
             FileName = fileName + ".txt";
-            this.Graph = graph;
+            this.graph = graph;
         }
 
-        public void Run(Window mainWindow)
+        public void Run(Window MainWindow)
         {
             if (!TrySetDirectory())
             {
-                new ErrorWindow(mainWindow,
+                new ErrorWindow(MainWindow,
                     $"Не знайдено директорію з таким іменем \"{Path}\"").ShowDialog();
                 return;
             }
 
-            if (!Write())
+            if (!TryWrite())
             {
-                new ErrorWindow(mainWindow,
+                new ErrorWindow(MainWindow,
                     $"Не вдалося записати до файлу \"{FileName}\"").ShowDialog();
-                return;
             }
         }
 
@@ -48,27 +47,27 @@ namespace clique.File
             }
         }
 
-        private bool Write()
+        private bool TryWrite()
         {
             try
             {
                 using (StreamWriter writer = new StreamWriter(FileName))
                 {
                     writer.WriteLine("Граф:");
-                    for (int i = 0; i < Graph.AdjacencyMatrix.GetLength(0); i++)
+                    for (int i = 0; i < graph.AdjacencyMatrix.GetLength(0); i++)
                     {
-                        for (int j = 0; j < Graph.AdjacencyMatrix.GetLength(1); j++)
-                            writer.Write(Graph.AdjacencyMatrix[i, j] + ", ");
+                        for (int j = 0; j < graph.AdjacencyMatrix.GetLength(1); j++)
+                            writer.Write(graph.AdjacencyMatrix[i, j] + ", ");
 
                         writer.WriteLine();
                     }
                     writer.WriteLine();
                     
                     writer.WriteLine("Кліка:");
-                    for (int i = 0; i < Graph.Clique.Length; i++)
+                    for (int i = 0; i < graph.Clique.Length; i++)
                     {
-                        writer.Write(Graph.Clique[i]);
-                        if (i != Graph.Clique.Length - 1) 
+                        writer.Write(graph.Clique[i]);
+                        if (i != graph.Clique.Length - 1) 
                             writer.Write(", ");
                     }
 

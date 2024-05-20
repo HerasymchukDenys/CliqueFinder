@@ -3,12 +3,12 @@
 public class GreedyMethod
 {
     private int[,] adjacencyMatrix;
-    private int[] clique;
+    private List<int> clique;
 
     public GreedyMethod(int[,] matrix)
     {
         adjacencyMatrix = matrix;
-        clique = new int[matrix.GetLength(0)];
+        clique = new List<int>();
     }
 
     public int[] FindMaximumClique()
@@ -17,16 +17,14 @@ public class GreedyMethod
         for (int i = 0; i < adjacencyMatrix.GetLength(0); i++)
             candidates.Add(i);
         
-        List<int> clique = new List<int>();
-
         foreach (int v in candidates)
-            if (IsClique(v, clique))
+            if (IsClique(v))
                 clique.Add(v);
         
         return clique.ToArray();
     }
 
-    private bool IsClique(int v, List<int> clique)
+    private bool IsClique(int v)
     {
         foreach (int u in clique)
             if (adjacencyMatrix[v, u] == 0)

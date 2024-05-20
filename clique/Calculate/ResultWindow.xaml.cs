@@ -1,13 +1,11 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using clique.DrawGraph;
 
 namespace clique.Calculate
 {
-    public partial class ResultWindow : Window
+    public partial class ResultWindow
     {
         public Graph graph { get; private set; }
         public bool ShowTime { get; private set; }
@@ -50,7 +48,7 @@ namespace clique.Calculate
                 TimePanel.Visibility = Visibility.Visible;
             }
 
-            if (graph.AdjacencyMatrix.GetLength(0) <= 10)
+            if (graph.AdjacencyMatrix.GetLength(0) < 11)
                 ShowCliqueButton.Visibility = Visibility.Visible;
         }
 
