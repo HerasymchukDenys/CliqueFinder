@@ -1,0 +1,51 @@
+﻿<Window x:Class="clique.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:clique"
+        mc:Ignorable="d"
+        Title="Clique Finder" Height="450" Width="800"
+        Icon="/clique;component/Resources/graph.ico">
+    
+    <Grid Background= "#1E1E1E">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="30*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid Grid.Background = "#2E2E2E" Grid.Column="0">
+            <TextBlock Text="Матриця Суміжності" FontWeight= "Bold" Foreground = "White" Margin="5"/>
+                <Grid Name="MatrixContainer" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25, 35, 0, 0"></Grid>
+            
+        </Grid>
+        
+        <Grid Name="ToolContainer" Grid.Column="1">
+        <TextBlock Text="Розмір графа" FontWeight= "Bold" Foreground = "White" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0, 10, 10, 0"/>
+            <ComboBox Background="Gray" Name="ComboBoxSize" SelectedIndex="0" Width="50" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0, 30, 10, 0"></ComboBox>
+        
+        <TextBlock Text ="Метод" FontWeight= "Bold" Foreground = "White" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0, 60, 10, 0"></TextBlock>
+            <ComboBox Background="Gray" Name="ComboBoxMethod" SelectedIndex="0" Width="190" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0, 80, 10, 0">
+                <ComboBoxItem Content="Жадібний метод"></ComboBoxItem>
+                <ComboBoxItem Content="Алгоритм Брона-Кербоша"></ComboBoxItem>
+            </ComboBox>
+        
+        <TextBlock Text="Запис у файл" FontWeight= "Bold" Foreground = "White" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0, 110, 10, 0"></TextBlock>
+            <ComboBox Background="Gray" Name="ComboBoxFile" SelectedIndex="1" Width="50" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0, 130, 10, 0">
+                <ComboBoxItem Content="Так"></ComboBoxItem>
+                 <ComboBoxItem Content="Ні"></ComboBoxItem>
+            </ComboBox>
+        
+        <TextBlock Text="Практична складність алгоритму" FontWeight= "Bold" Foreground = "White" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0, 160, 10, 0"></TextBlock>
+            <ComboBox Background="Gray" Name="ComboBoxComplexity" SelectedIndex="1" Width="50" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0, 180, 10, 0">
+                <ComboBoxItem Content="Так"></ComboBoxItem>
+                <ComboBoxItem Content="Ні"></ComboBoxItem>
+            </ComboBox>
+        
+        <Button Name = "StartFinding" Content="Знайти кліку" Width="110" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0, 0, 100, 10"></Button>
+        
+        <Button Name = "Exit" Content="Вийти" Width="80" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10"></Button>
+        </Grid>
+    </Grid>
+
+</Window>

@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "RD2EdS5jAdR/pI7KXJja2P9Of69LJU07NxJWmx3jCJFXx37FCkp6oR91IbtTJb880uo94v1uzBgwyDWqO2O7CA==",
+  "success": true,
+  "projectFilePath": "D:\\course_work\\clique\\clique\\clique.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Denis\\.nuget\\packages\\microsoft.netframework.referenceassemblies\\1.0.3\\microsoft.netframework.referenceassemblies.1.0.3.nupkg.sha512",
+    "C:\\Users\\Denis\\.nuget\\packages\\microsoft.netframework.referenceassemblies.net461\\1.0.3\\microsoft.netframework.referenceassemblies.net461.1.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
