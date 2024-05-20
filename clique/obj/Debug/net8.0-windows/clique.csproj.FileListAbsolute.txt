@@ -25,3 +25,4 @@ D:\course_work\clique\clique\obj\Debug\net8.0-windows\Calculate\ResultWindow.g.c
 D:\course_work\clique\clique\obj\Debug\net8.0-windows\Calculate\ResultWindow.baml
 D:\course_work\clique\clique\obj\Debug\net8.0-windows\Validate\ErrorWindow.g.cs
 D:\course_work\clique\clique\obj\Debug\net8.0-windows\Validate\ErrorWindow.baml
+D:\course_work\clique\clique\obj\Debug\net8.0-windows\clique.sourcelink.json

@@ -12,16 +12,7 @@ public class BronKerbosch
         clique = new int[matrix.GetLength(0)];
         maxCliqueSize = 0;
     }
-
-    private bool IsClique(int v, List<int> candidates)
-    {
-        foreach (int i in candidates)
-            if (adjacencyMatrix[v, i] == 0)
-                return false;
-        
-        return true;
-    }
-
+    
     private void MaximumCliqueFinder(List<int> R, List<int> P, List<int> X)
     {
         if (P.Count == 0 && X.Count == 0)
@@ -47,7 +38,7 @@ public class BronKerbosch
             X.Add(v);
         }
     }
-
+    
     public int[] FindMaximumClique()
     {
         List<int> vertices = new List<int>();
