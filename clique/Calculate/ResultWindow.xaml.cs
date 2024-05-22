@@ -8,12 +8,10 @@ namespace clique.Calculate
     public partial class ResultWindow
     {
         public Graph graph { get; private set; }
-        public bool ShowTime { get; private set; }
 
-        public ResultWindow(Window MainWindow, Graph graph, bool showTime)
+        public ResultWindow(Window MainWindow, Graph graph)
         {
             this.graph = graph;
-            ShowTime = showTime;
             this.Owner = MainWindow;
             this.Content = mainGrid;
             this.Foreground = Brushes.White;
@@ -42,10 +40,11 @@ namespace clique.Calculate
                 count++;
             }
 
-            if (ShowTime)
+            if (graph.ShowComplexity)
             {
-                TimePanel.Text = $"Час: {graph.Time:N15}  сек.";
-                TimePanel.Visibility = Visibility.Visible;
+                ComplexityPanel.Text = $"Кількість ітерацій: {graph.NumberOfIterations}\n" +
+                                 $"Кількість елементарних операцій: {graph.NumberOfElementaryOperations}";
+                ComplexityPanel.Visibility = Visibility.Visible;
             }
 
             if (graph.AdjacencyMatrix.GetLength(0) < 11)
@@ -60,7 +59,7 @@ namespace clique.Calculate
         private void ShowClique(object sender, EventArgs e)
         {
             GraphDrawing graphDrawing = new GraphDrawing(this, graph);
-            graphDrawing.Show();
+            graphDrawing.ShowDialog();
         }
     }
 }

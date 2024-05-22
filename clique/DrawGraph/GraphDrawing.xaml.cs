@@ -17,10 +17,10 @@ namespace clique.DrawGraph
             this.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             InitializeComponent();
             Exit.Click += Close;
-            graphCanvas.SizeChanged += GraphCanvas_SizeChanged;
+            graphCanvas.SizeChanged += GraphCanvasSizeChanged;
         }
 
-        private void GraphCanvas_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void GraphCanvasSizeChanged(object sender, SizeChangedEventArgs e)
         {
             DrawGraph();
         }

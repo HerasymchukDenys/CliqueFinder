@@ -13,7 +13,7 @@ public class ValidateAdjacencyMatrix
         this.MainWindow = MainWindow;
     }
     
-    public void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+    public void PreviewTextInput(object sender, TextCompositionEventArgs e)
     {
         if (!IsNumber(e.Text) || (e.Text != "0" && e.Text != "1"))
         {
@@ -31,7 +31,7 @@ public class ValidateAdjacencyMatrix
         return int.TryParse(text, out _);
     }
     
-    public void TextBox_DiagonalElementEqualsOne(TextBox textBox)
+    public void DiagonalElementEqualsOne(TextBox textBox)
     {
         ErrorWindow errorWindow = new ErrorWindow(MainWindow,
             "Цикли у графі призводять до некоректної роботи алгоритмів");

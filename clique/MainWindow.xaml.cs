@@ -72,7 +72,7 @@ public partial class MainWindow
 
                     if (int.TryParse(((TextBox)s).Text, out int value))
                         if (row == column && value == 1)
-                            new ValidateAdjacencyMatrix(this).TextBox_DiagonalElementEqualsOne((TextBox)s);
+                            new ValidateAdjacencyMatrix(this).DiagonalElementEqualsOne((TextBox)s);
                         else
                         {
                             textBoxes[row, column].Text = value.ToString();
@@ -81,12 +81,12 @@ public partial class MainWindow
                         }
                 };
         
-                textBox.PreviewTextInput += new ValidateAdjacencyMatrix(this).TextBox_PreviewTextInput;
-                textBox.PreviewKeyDown += TextBox_PreviewKeyDown;
+                textBox.PreviewTextInput += new ValidateAdjacencyMatrix(this).PreviewTextInput;
+                textBox.PreviewKeyDown += PreviewKey;
             }
     }
 
-    private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+    private void PreviewKey(object sender, KeyEventArgs e)
     {
         if (sender is TextBox textBox)
         {
@@ -208,7 +208,8 @@ public partial class MainWindow
     private void InitializeFinding(object sender, EventArgs e)
     {
         string method = ((ComboBoxItem)ComboBoxMethod.SelectedItem).Content.ToString();
-        graph = new Graph(this, textBoxes, method);
+        bool showComplexity = ((ComboBoxItem)ComboBoxComplexity.SelectedItem).Content.ToString() == "Так";
+        graph = new Graph(this, textBoxes, method, showComplexity);
         graph.Calulate();
         if(graph.CorrectMatrix)
             ShowResult();
@@ -243,10 +244,7 @@ public partial class MainWindow
 
     private void ShowResult()
     {
-        string toDoComplexity = ((ComboBoxItem)ComboBoxComplexity.SelectedItem).Content.ToString();
-        bool showTime = toDoComplexity == "Так";
-        
-        ResultWindow resultWindow = new ResultWindow(this, graph, showTime);
+        ResultWindow resultWindow = new ResultWindow(this, graph);
         resultWindow.ShowDialog();
     }
     

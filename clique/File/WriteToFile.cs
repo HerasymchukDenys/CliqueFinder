@@ -70,8 +70,17 @@ namespace clique.File
                         if (i != graph.Clique.Length - 1) 
                             writer.Write(", ");
                     }
-
                     writer.WriteLine();
+                    writer.WriteLine();
+                    
+                    writer.WriteLine($"Вибраний метод: {graph.ChosenMethod}");
+                    writer.WriteLine();
+                    
+                    if (graph.ShowComplexity)
+                    {
+                        writer.WriteLine($"Кількість ітерацій: {graph.NumberOfIterations}");
+                        writer.WriteLine($"Кількість елементарних операцій: {graph.NumberOfElementaryOperations}");
+                    }
                 }
                 return true;
             }

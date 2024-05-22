@@ -9,19 +9,22 @@ namespace clique.Calculate;
 public class Graph
 {
     private TextBox[,] textBoxes;
-    private String chosenMethod;
-    
+
     public Window MainWindow { get; private set; }
     public int[,] AdjacencyMatrix { get; private set; }
-    public int[] Clique { get; private set; }
-    public double Time { get; private set; }
     public bool CorrectMatrix { get; private set; }
+    public String ChosenMethod { get; private set; }
+    public int[] Clique { get; private set; }
+    public bool ShowComplexity { get; private set; }
+    public int NumberOfIterations { get; private set; }
+    public int NumberOfElementaryOperations { get; private set; }
 
-    public Graph(Window MainWindow, TextBox[,] textBoxes, String chosenMethod)
+    public Graph(Window MainWindow, TextBox[,] textBoxes, String ChosenMethod, bool ShowComplexity)
     {
         this.MainWindow = MainWindow;
         this.textBoxes = textBoxes;
-        this.chosenMethod = chosenMethod;
+        this.ChosenMethod = ChosenMethod;
+        this.ShowComplexity = ShowComplexity;
         CorrectMatrix = true;
     }
     
@@ -30,19 +33,21 @@ public class Graph
         AdjacencyMatrix = ReadMatrix();
         if (CorrectMatrix)
         {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-            switch (chosenMethod)
+            switch (ChosenMethod)
             {
                 case "Жадібний метод":
-                    Clique = new GreedyMethod(AdjacencyMatrix).FindMaximumClique();
+                    GreedyMethod greedyMethod = new GreedyMethod(AdjacencyMatrix);
+                    Clique = greedyMethod.FindMaximumClique();
+                    NumberOfIterations = greedyMethod.NumberOfIterations;
+                    NumberOfElementaryOperations = greedyMethod.NumberOfElementaryOperations;
                     break;
                 case "Алгоритм Брона-Кербоша":
-                    Clique = new BronKerbosch(AdjacencyMatrix).FindMaximumClique();
+                    BronKerbosch bronKerbosch = new BronKerbosch(AdjacencyMatrix);
+                    Clique = bronKerbosch.FindMaximumClique();
+                    NumberOfIterations = bronKerbosch.NumberOfIterations;
+                    NumberOfElementaryOperations = bronKerbosch.NumberOfElementaryOperations;
                     break;
             }
-            stopwatch.Stop();
-            Time = stopwatch.ElapsedMilliseconds * 0.001;
         }
     }
     
