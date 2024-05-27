@@ -27,20 +27,20 @@ public partial class MainWindow
 
     private void InitializeComboBox(object sender, EventArgs e)
     {
-        for (int i = 3; i <= 30; i++)
+        for (int i = 3; i <= 40; i++)
             ComboBoxSize.Items.Add(new ComboBoxItem { Content = i });
     }
     
     private void InitializeTemplateOfMatrix(object sender, EventArgs e)
     {
-        int matrixSize = int.Parse(((ComboBoxItem)ComboBoxSize.SelectedItem).Content.ToString());
-        textBoxes = new TextBox[matrixSize, matrixSize];
-        
         MatrixContainer.Children.Clear();
         MatrixContainer.RowDefinitions.Clear();
         MatrixContainer.ColumnDefinitions.Clear();
-
-        double cellSize = 30;
+        
+        int matrixSize = int.Parse(((ComboBoxItem)ComboBoxSize.SelectedItem).Content.ToString());
+        textBoxes = new TextBox[matrixSize, matrixSize];
+        
+        double cellSize = 25;
         for (int i = 0; i < matrixSize; i++)
         {
             MatrixContainer.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(cellSize) });
@@ -65,24 +65,25 @@ public partial class MainWindow
         
                 textBoxes[i, j] = textBox;
 
-                textBox.TextChanged += (s, args) =>
-                {
-                    int row = Grid.GetRow((TextBox)s);
-                    int column = Grid.GetColumn((TextBox)s);
-
-                    if (int.TryParse(((TextBox)s).Text, out int value))
-                        if (row == column && value == 1)
-                            new ValidateAdjacencyMatrix(this).DiagonalElementEqualsOne((TextBox)s);
-                        else
-                        {
-                            textBoxes[row, column].Text = value.ToString();
-                            if (row != column)
-                                textBoxes[column, row].Text = value.ToString();
-                        }
-                };
-        
+                textBox.TextChanged += SymmetricalDisplay;
                 textBox.PreviewTextInput += new ValidateAdjacencyMatrix(this).PreviewTextInput;
                 textBox.PreviewKeyDown += PreviewKey;
+            }
+    }
+
+    private void SymmetricalDisplay(object sender, TextChangedEventArgs e)
+    {
+        int row = Grid.GetRow((TextBox)sender);
+        int column = Grid.GetColumn((TextBox)sender);
+
+        if (int.TryParse(((TextBox)sender).Text, out int value))
+            if (row == column && value == 1)
+                new ValidateAdjacencyMatrix(this).DiagonalElementEqualsOne((TextBox)sender);
+            else
+            {
+                textBoxes[row, column].Text = value.ToString();
+                if (row != column)
+                    textBoxes[column, row].Text = value.ToString();
             }
     }
 
@@ -223,13 +224,11 @@ public partial class MainWindow
             if (selectedValue == "Ні")
                 return;
             
-            TextBox folderPathTextBox = ToolContainer.Children.OfType<TextBox>()
-                    .FirstOrDefault(tb => tb.Name == "FolderPathTextBox");
-            string folderPath = folderPathTextBox?.Text;
-
-            TextBox fileNameTextBox = ToolContainer.Children.OfType<TextBox>()
-                .FirstOrDefault(tb => tb.Name == "FileNameTextBox");
-            string fileName = fileNameTextBox?.Text;
+            TextBox? folderPathTextBox = FindTextBoxByName("FolderPathTextBox");
+            TextBox? fileNameTextBox = FindTextBoxByName("FileNameTextBox");
+            
+            string folderPath = folderPathTextBox.Text;
+            string fileName = fileNameTextBox.Text;
 
             WriteToFile writeToFile = new WriteToFile(folderPath, fileName, graph);
 
@@ -246,6 +245,12 @@ public partial class MainWindow
     {
         ResultWindow resultWindow = new ResultWindow(this, graph);
         resultWindow.ShowDialog();
+    }
+    
+    private TextBox FindTextBoxByName(string name)
+    {
+        return ToolContainer.Children.OfType<TextBox>()
+            .FirstOrDefault(tb => tb.Name == name);
     }
     
     private void RemoveElementByName(string name)

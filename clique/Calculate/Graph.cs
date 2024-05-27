@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using clique.Algorithms;
-using System.Diagnostics;
 using clique.Validate;
 
 namespace clique.Calculate;

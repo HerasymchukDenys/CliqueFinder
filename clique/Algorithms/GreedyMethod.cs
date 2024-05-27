@@ -27,7 +27,7 @@ public class GreedyMethod
 
         foreach (int v in candidates)
         {
-            NumberOfIterations++; ////
+            NumberOfIterations++; ////ПОч
             NumberOfElementaryOperations++; ////
             if (IsClique(v))
             {

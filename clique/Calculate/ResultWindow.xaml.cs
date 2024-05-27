@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using clique.DrawGraph;
 
@@ -25,19 +24,16 @@ namespace clique.Calculate
 
         private void InitializeResult()
         {
-            int count = 0;
-            foreach (int num in graph.Clique)
+            int count = graph.Clique.Length;
+            for (int i = 0; i < count; i++)
             {
-                if (count > 0 && count % 10 == 0)
-                    StackPanel.Children.Add(new TextBlock { Text = "\n" });
-
-                TextBlock textBlock = new TextBlock();
-                textBlock.Text = num.ToString();
-                if (count > 0)
-                    textBlock.Text = ", " + textBlock.Text;
-
-                StackPanel.Children.Add(textBlock);
-                count++;
+                Result.Text += graph.Clique[i];
+                if (i < count - 1)
+                {
+                    Result.Text += ", ";
+                    if ((i + 1) % 10 == 0)
+                        Result.Text += "\n";
+                }
             }
 
             if (graph.ShowComplexity)
